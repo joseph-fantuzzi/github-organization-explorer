@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   return (
     <div>
-      <h1>GitHub Organization Explorer</h1>
+      <h1 className="text-2xl">GitHub Organization Explorer</h1>
     </div>
   );
 }

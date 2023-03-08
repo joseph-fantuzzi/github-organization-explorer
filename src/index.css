@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Eric Meyer's Reset */
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
