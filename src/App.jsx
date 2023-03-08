@@ -40,6 +40,13 @@ function App() {
     }
   };
 
+  //sorts organization's repos by star count in descending order
+  const sortedRepos = repos.sort((a, b) => {
+    if (a.stargazers_count < b.stargazers_count) return 1;
+    if (a.stargazers_count > b.stargazers_count) return -1;
+    return 0;
+  });
+
   return (
     <div className="text-center py-5">
       <h1 className="text-2xl">GitHub Organization Explorer</h1>
@@ -54,7 +61,7 @@ function App() {
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       </form>
       <div>
-        {repos.map((repo, i) => {
+        {sortedRepos.map((repo, i) => {
           return (
             <div key={i} className="p-5 border-2 w-7/12 mx-auto">
               <h1 className="text-xl underline">{repo.name}</h1>
