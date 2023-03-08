@@ -30,10 +30,12 @@ function App() {
           `${BASE_URL}/orgs/${searchValue}/repos`
         );
         setRepos(response.data);
+        if (response.data.length === 0)
+          setErrorMessage("Organization is private");
       }
     } catch (err) {
       setRepos([]);
-      setErrorMessage(err.response.data.message);
+      setErrorMessage("Organization not found");
       console.error(err);
     }
   };
