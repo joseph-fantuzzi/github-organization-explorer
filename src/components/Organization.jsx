@@ -104,7 +104,7 @@ const Organization = ({
         ) : (
           filteredRepoSearch().map((repo, i) => {
             return (
-              <Link key={i} to={repo.name}>
+              <Link key={i} to={repo.name.trim().toLowerCase()}>
                 <div className="p-5 md:p-10 cursor-pointer shadow-lg rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white">
                   <div>
                     <div className="flex flex-wrap items-center gap-5 mb-3">
