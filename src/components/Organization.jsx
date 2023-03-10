@@ -78,17 +78,20 @@ const Organization = ({
   };
 
   return (
-    <div className="w-11/12 max-w-7xl min-h-[100svh] md:w-3/4 mx-auto pt-5">
+    <div className="w-11/12 max-w-6xl min-h-[100svh] md:w-3/4 mx-auto pt-5">
       <Navbar
-        searchRepoName={searchRepoName}
-        setSearchRepoName={setSearchRepoName}
+        searchName={searchRepoName}
+        setSearchName={setSearchRepoName}
+        repoList={true}
       />
       <div className="py-5">
         <h1 className="text-2xl font-medium">
           {capitalizeFirstLetter(orgName)}
         </h1>
         <p className="text-sm font-light">
-          {filteredRepoSearch().length} repositories found
+          {filteredRepoSearch().length}{" "}
+          {filteredRepoSearch().length === 1 ? "repository " : "repositories "}
+          found
         </p>
       </div>
       <div className="flex flex-col gap-3 min-h-main">
@@ -123,7 +126,7 @@ const Organization = ({
                       <AiOutlineStar size={25} />
                       <p>{repo.stargazers_count.toLocaleString()}</p>
                     </div>
-                    <div className="bg-white w-full w-1 h-10" />
+                    <div className="bg-white w-1 h-10" />
                     <div className="flex gap-1 items-center">
                       <AiOutlineFork size={25} />
                       <p>{repo.forks_count.toLocaleString()}</p>

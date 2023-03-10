@@ -1,6 +1,7 @@
-import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import Navbar from "./Navbar";
 
 const Repo = ({
   commits,
@@ -12,6 +13,8 @@ const Repo = ({
   setZeroCommits,
 }) => {
   const { orgName, repoName } = useParams();
+
+  const [searchCommitName, setSearchCommitName] = useState("");
 
   /**
    * On initial render, sends a get request to github api to retrieve commit data for that repo
@@ -35,19 +38,30 @@ const Repo = ({
     viewCommitList();
   }, []);
 
+  /**filters specfic repository's commits by search query from user
+   * @returns filtered array
+   */
+  const filteredCommitSearch = () => {
+    const sanitize = searchCommitName.trim().toLowerCase();
+    if (!sanitize) return commits;
+    return commits.filter((commit) => {
+      return commit.commit.message.toLowerCase().includes(sanitize);
+    });
+  };
+
   return (
-    <div className="text-center py-5">
-      <div className="mb-5">
-        <Link className="border-2" to="/">
-          Go Back
-        </Link>
-      </div>
+    <div className="w-11/12 max-w-6xl min-h-[100svh] md:w-3/4 mx-auto pt-5">
+      <Navbar
+        searchName={searchCommitName}
+        setSearchName={setSearchCommitName}
+        repoList={false}
+      />
       {repoNotFound ? (
         <div>Repo Not Found</div>
       ) : zeroCommits ? (
         <div>This repository must be private or simply has no commits</div>
       ) : (
-        commits.map((commit, index) => {
+        filteredCommitSearch().map((commit, index) => {
           return (
             <div key={index} className="p-5 border-2 w-7/12 mx-auto">
               <h1>{commit.commit.message}</h1>

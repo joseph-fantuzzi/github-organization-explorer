@@ -1,13 +1,13 @@
 import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ searchRepoName, setSearchRepoName }) => {
+const Navbar = ({ searchName, setSearchName, repoList }) => {
   /**
    * Sets the search value state to the value within the input
    * @param {*} e
    */
   const handleSearchChange = (e) => {
-    setSearchRepoName(e.target.value);
+    setSearchName(e.target.value);
   };
 
   return (
@@ -19,9 +19,13 @@ const Navbar = ({ searchRepoName, setSearchRepoName }) => {
         <FiSearch className="absolute top-3 left-3" />
         <input
           type="text"
-          value={searchRepoName}
+          value={searchName}
           onChange={handleSearchChange}
-          placeholder="Search this repository..."
+          placeholder={
+            repoList
+              ? "Search this organization..."
+              : "Search this repository..."
+          }
           className="bg-white py-2 px-8 rounded-full font-light text-sm w-full border-2 border-white outline-0 focus:border-black transition duration-300 ease"
         />
       </div>
