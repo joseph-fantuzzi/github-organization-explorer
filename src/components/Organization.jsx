@@ -6,6 +6,7 @@ import {
   AiOutlineStar,
   AiOutlineCalendar,
 } from "react-icons/ai";
+import ReactLoading from "react-loading";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
@@ -21,6 +22,7 @@ const Organization = ({
   const { orgName } = useParams();
 
   const [searchRepoName, setSearchRepoName] = useState("");
+  const [loadingData, setLoadingData] = useState(false);
 
   /**
    * On initial render, sends a get request to github api to retrieve repo data for that organization
@@ -28,12 +30,15 @@ const Organization = ({
   useEffect(() => {
     const fetchOrgRepos = async () => {
       try {
+        setLoadingData(true);
         const response = await axios.get(`${BASE_URL}/orgs/${orgName}/repos`);
+        setLoadingData(false);
         setRepos(response.data);
         if (response.data.length === 0) {
           setZeroRepos(true);
         }
       } catch (err) {
+        setLoadingData(false);
         setRepos([]);
         setOrgNotFound(true);
         console.error(err);
@@ -94,8 +99,14 @@ const Organization = ({
           found
         </p>
       </div>
-      <div className="flex flex-col gap-3 min-h-main">
-        {orgNotFound ? (
+      <div
+        className={`flex flex-col gap-3 min-h-main ${
+          loadingData && "items-center justify-center pb-40"
+        }`}
+      >
+        {loadingData ? (
+          <ReactLoading type={"spin"} color={"#000"} height={100} width={100} />
+        ) : orgNotFound ? (
           <div>Organization Not Found</div>
         ) : zeroRepos ? (
           <div>
