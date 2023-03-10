@@ -1,8 +1,8 @@
 import { useState } from "react";
-import axios from "axios";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
-import Commits from "./components/Commits";
+import Repo from "./components/Repo";
+import Organization from "./components/Organization";
 import "./App.css";
 
 const BASE_URL = "https://api.github.com";
@@ -10,9 +10,13 @@ const BASE_URL = "https://api.github.com";
 function App() {
   const [repos, setRepos] = useState([]);
   const [commits, setCommits] = useState([]);
-  const [currentOrganization, setCurrentOrganization] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [orgNotFound, setOrgNotFound] = useState(false);
+  const [repoNotFound, setRepoNotFound] = useState(false);
+  const [zeroRepos, setZeroRepos] = useState(false);
+  const [zeroCommits, setZeroCommits] = useState(false);
+
+  const navigate = useNavigate();
 
   /**
    * Sets the search value state to the value within the input
@@ -23,38 +27,20 @@ function App() {
   };
 
   /**
-   * Sends a get request to github api to retrieve repo data for that organization
+   * Navigates the user to the specified organization route if a search value is specified
    * @param {*} e
    */
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage("");
-    try {
-      if (searchValue) {
-        const response = await axios.get(
-          `${BASE_URL}/orgs/${searchValue}/repos`
-        );
-        setRepos(response.data);
-        if (response.data.length === 0) {
-          setErrorMessage("Organization is private");
-        } else {
-          setCurrentOrganization(searchValue);
-        }
-        setSearchValue("");
-      }
-    } catch (err) {
-      setRepos([]);
-      setErrorMessage("Organization not found");
-      console.error(err);
+    if (searchValue) {
+      setRepoNotFound(false);
+      setOrgNotFound(false);
+      setZeroRepos(false);
+      setZeroCommits(false);
+      navigate(`/${searchValue}`);
+      setSearchValue("");
     }
   };
-
-  //sorts organization's repos by star count in descending order
-  const sortedRepos = repos.sort((a, b) => {
-    if (a.stargazers_count < b.stargazers_count) return 1;
-    if (a.stargazers_count > b.stargazers_count) return -1;
-    return 0;
-  });
 
   return (
     <Routes>
@@ -62,22 +48,37 @@ function App() {
         path="/"
         element={
           <Home
-            sortedRepos={sortedRepos}
             searchValue={searchValue}
             handleSearchChange={handleSearchChange}
             handleFormSubmit={handleFormSubmit}
-            errorMessage={errorMessage}
           />
         }
       />
       <Route
-        path="/:repoName"
+        path="/:orgName"
         element={
-          <Commits
+          <Organization
+            BASE_URL={BASE_URL}
+            repos={repos}
+            setRepos={setRepos}
+            orgNotFound={orgNotFound}
+            setOrgNotFound={setOrgNotFound}
+            zeroRepos={zeroRepos}
+            setZeroRepos={setZeroRepos}
+          />
+        }
+      />
+      <Route
+        path="/:orgName/:repoName"
+        element={
+          <Repo
             commits={commits}
             setCommits={setCommits}
-            currentOrganization={currentOrganization}
             BASE_URL={BASE_URL}
+            repoNotFound={repoNotFound}
+            setRepoNotFound={setRepoNotFound}
+            zeroCommits={zeroCommits}
+            setZeroCommits={setZeroCommits}
           />
         }
       />
