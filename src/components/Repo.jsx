@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { AiOutlineCalendar } from "react-icons/ai";
+import { FiCopy, FiCheck, FiArrowLeft } from "react-icons/fi";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
@@ -17,6 +18,7 @@ const Repo = ({
   const { orgName, repoName } = useParams();
 
   const [searchCommitName, setSearchCommitName] = useState("");
+  const [copied, setCopied] = useState("");
 
   /**
    * On initial render, sends a get request to github api to retrieve commit data for that repo
@@ -66,6 +68,20 @@ const Repo = ({
     return `${date.getMonth() + 1}.${date.getDate()}.${date.getFullYear()}`;
   };
 
+  // takes in a sha commit hash and copies it to the user's clipboard
+  const copyShaHash = async (hash) => {
+    try {
+      setCopied(hash);
+      await navigator.clipboard.writeText(hash);
+      setTimeout(() => {
+        setCopied("");
+      }, 3000);
+    } catch (err) {
+      setCopied("");
+      console.error("Failed to copy: ", err);
+    }
+  };
+
   return (
     <div className="w-11/12 max-w-6xl min-h-[100svh] md:w-3/4 mx-auto pt-5">
       <Navbar
@@ -74,9 +90,17 @@ const Repo = ({
         repoList={false}
       />
       <div className="py-5">
-        <h1 className="text-2xl font-medium">
-          {capitalizeFirstLetter(orgName)}/{capitalizeFirstLetter(repoName)}
-        </h1>
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-medium">
+            {capitalizeFirstLetter(orgName)}/{capitalizeFirstLetter(repoName)}
+          </h1>
+          <Link to={`/${orgName}`}>
+            <FiArrowLeft
+              size={25}
+              className="bg-black text-white rounded-full p-1 hover:text-black hover:bg-white transition duration-300 ease"
+            />
+          </Link>
+        </div>
         <p className="text-sm font-light">
           {filteredCommitSearch().length}{" "}
           {filteredCommitSearch().length === 1 ? "commit " : "commits "}
@@ -93,7 +117,7 @@ const Repo = ({
             return (
               <div
                 key={i}
-                className="p-5 md:p-10 shadow-lg rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white"
+                className="p-5 md:p-10 shadow-md rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white"
               >
                 <div>
                   <div className="flex flex-wrap items-center gap-5 mb-3">
@@ -115,8 +139,17 @@ const Repo = ({
                     <p>{commit.author?.login}</p>
                   </div>
                 </div>
-                <div className="w-fit flex items-center gap-2 bg-black text-white font-light px-5 py-3 rounded-full">
-                  <p>{commit.sha}</p>
+                <div className="w-fit flex items-center gap-2 bg-black text-white font-light px-5 rounded-full">
+                  {copied === commit.sha ? (
+                    <FiCheck className="m-1 text-green-300" />
+                  ) : (
+                    <FiCopy
+                      className="cursor-pointer m-1"
+                      onClick={() => copyShaHash(commit.sha)}
+                    />
+                  )}
+                  <div className="bg-white w-1 h-10" />
+                  <p className="m-1">{commit.sha.slice(0, 7)}</p>
                 </div>
               </div>
             );
