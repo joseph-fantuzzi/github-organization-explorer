@@ -1,4 +1,5 @@
 import { FiSearch } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ searchRepoName, setSearchRepoName }) => {
   /**
@@ -11,7 +12,9 @@ const Navbar = ({ searchRepoName, setSearchRepoName }) => {
 
   return (
     <div className="pb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-2">
-      <h1 className="font-light">GitHub Organization Explorer</h1>
+      <Link to="/" className="font-light">
+        GitHub Organization Explorer
+      </Link>
       <div className="relative flex items-center gap-2 w-full md:w-1/2">
         <FiSearch className="absolute top-3 left-3" />
         <input

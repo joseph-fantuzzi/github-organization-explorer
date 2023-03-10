@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Organization = ({
   BASE_URL,
@@ -52,17 +53,25 @@ const Organization = ({
     });
   };
 
+  //capitalizes the first letter of a string
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   return (
-    <div className="w-11/12 md:w-3/4 mx-auto py-5">
+    <div className="w-11/12 md:w-3/4 mx-auto pt-5">
       <Navbar
         searchRepoName={searchRepoName}
         setSearchRepoName={setSearchRepoName}
       />
-      {/* <div className="mb-5">
-        <Link className="border-2" to="/">
-          Go Back
-        </Link>
-      </div> */}
+      <div className="py-5">
+        <h1 className="text-2xl font-medium">
+          {capitalizeFirstLetter(orgName)}
+        </h1>
+        <p className="text-sm font-light">
+          {filteredRepoSearch().length} repositories found
+        </p>
+      </div>
       {orgNotFound ? (
         <div>Organization Not Found</div>
       ) : zeroRepos ? (
@@ -85,6 +94,9 @@ const Organization = ({
           );
         })
       )}
+      <div className="text-center py-5">
+        <Footer />
+      </div>
     </div>
   );
 };
