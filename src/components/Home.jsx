@@ -15,7 +15,7 @@ const Home = ({ searchValue, handleSearchChange, handleFormSubmit }) => {
             type="text"
             value={searchValue}
             onChange={handleSearchChange}
-            placeholder="Search..."
+            placeholder="Search Organization..."
             className="bg-white p-3 rounded-lg font-light text-sm w-full border-2 border-white outline-0 focus:border-black transition duration-300 ease"
           />
           <button className="p-4 bg-black text-white rounded-lg hover:text-black hover:bg-white active:text-black active:bg-white transition duration-300 ease">

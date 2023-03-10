@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const Organization = ({
   BASE_URL,
@@ -12,6 +13,8 @@ const Organization = ({
   setZeroRepos,
 }) => {
   const { orgName } = useParams();
+
+  const [searchRepoName, setSearchRepoName] = useState("");
 
   /**
    * On initial render, sends a get request to github api to retrieve repo data for that organization
@@ -40,13 +43,26 @@ const Organization = ({
     return 0;
   });
 
+  //filters organization's repos by search query from user
+  const filteredRepoSearch = () => {
+    const sanitize = searchRepoName.trim().toLowerCase();
+    if (!sanitize) return sortedRepos;
+    return sortedRepos.filter((repo) => {
+      return repo.name.toLowerCase().includes(sanitize);
+    });
+  };
+
   return (
-    <div className="text-center py-5">
-      <div className="mb-5">
+    <div className="w-11/12 md:w-3/4 mx-auto py-5">
+      <Navbar
+        searchRepoName={searchRepoName}
+        setSearchRepoName={setSearchRepoName}
+      />
+      {/* <div className="mb-5">
         <Link className="border-2" to="/">
           Go Back
         </Link>
-      </div>
+      </div> */}
       {orgNotFound ? (
         <div>Organization Not Found</div>
       ) : zeroRepos ? (
@@ -54,7 +70,7 @@ const Organization = ({
           This Organization must be private or simply has no repositories
         </div>
       ) : (
-        sortedRepos.map((repo, i) => {
+        filteredRepoSearch().map((repo, i) => {
           return (
             <Link key={i} to={repo.name}>
               <div className="p-5 border-2 w-7/12 mx-auto cursor-pointer hover:border-red-500">

@@ -37,7 +37,7 @@ function App() {
       setOrgNotFound(false);
       setZeroRepos(false);
       setZeroCommits(false);
-      navigate(`/${searchValue}`);
+      navigate(`/${searchValue.trim().toLowerCase()}`);
       setSearchValue("");
     }
   };
