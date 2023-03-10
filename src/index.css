@@ -143,4 +143,6 @@ table {
 
 body {
   min-height: 100svh;
+  font-family: Poppins, sans-serif;
+  background-color: #f8f8f8;
 }
