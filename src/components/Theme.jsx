@@ -1,4 +1,5 @@
 const Theme = ({ toggle, setToggle }) => {
+  //sets local storage theme based on preference and updates html class name
   const handleTheme = () => {
     if (toggle === "light") {
       localStorage.theme = "dark";
