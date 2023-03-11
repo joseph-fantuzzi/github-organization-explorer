@@ -20,7 +20,7 @@ const Error = ({ notFound, privateRepos, noCommits }) => {
           : "This repository does not exist"}
       </p>
       <div className="w-1 h-12 rounded-full bg-white rotate-[30deg]" />
-      <Link to="/">
+      <Link to="/" data-testid="error-btn">
         <AiOutlineHome
           size={26}
           className="bg-white border-2 border-white rounded-full text-black m-1 p-1 hover:text-white hover:bg-black transition duration-300 ease"
