@@ -95,7 +95,7 @@ const Repo = ({
         setSearchName={setSearchCommitName}
         repoList={false}
       />
-      <div className="py-5">
+      <div className="py-5 dark:text-white theme-transition">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-medium">
             {capitalizeFirstLetter(orgName)}/{capitalizeFirstLetter(repoName)}
@@ -103,7 +103,7 @@ const Repo = ({
           <Link to={`/${orgName}`}>
             <FiArrowLeft
               size={25}
-              className="bg-black text-white rounded-full p-1 hover:text-black hover:bg-white transition duration-300 ease"
+              className="bg-black border-2 border-black text-white rounded-full p-1 hover:text-black hover:bg-white transition duration-300 ease dark:border-white"
             />
           </Link>
         </div>
@@ -129,7 +129,7 @@ const Repo = ({
             return (
               <div
                 key={i}
-                className="p-5 md:p-10 shadow-md rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white"
+                className="p-5 md:p-10 shadow-md border-2 border-white rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white dark:bg-black dark:text-white dark:border-gray-500 dark:shadow-none theme-transition"
               >
                 <div>
                   <div className="flex flex-wrap items-center gap-5 mb-3">
@@ -151,7 +151,7 @@ const Repo = ({
                     <p>{commit.author?.login}</p>
                   </div>
                 </div>
-                <div className="w-fit flex items-center gap-2 bg-black text-white font-light px-5 rounded-full">
+                <div className="w-fit flex items-center gap-2 border-2 border-black bg-black text-white font-light px-5 py-2 rounded-full dark:border-gray-500 theme-transition">
                   {copied === commit.sha ? (
                     <FiCheck className="m-1 text-green-300" />
                   ) : (
@@ -160,7 +160,7 @@ const Repo = ({
                       onClick={() => copyShaHash(commit.sha)}
                     />
                   )}
-                  <div className="bg-white w-1 h-10" />
+                  <div className="bg-white w-1 h-8 rounded-full dark:bg-gray-500 theme-transition" />
                   <p className="m-1">{commit.sha.slice(0, 7)}</p>
                 </div>
               </div>

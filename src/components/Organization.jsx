@@ -90,7 +90,7 @@ const Organization = ({
         setSearchName={setSearchRepoName}
         repoList={true}
       />
-      <div className="py-5">
+      <div className="py-5 dark:text-white theme-transition">
         <h1 className="text-2xl font-medium">
           {capitalizeFirstLetter(orgName)}
         </h1>
@@ -106,7 +106,12 @@ const Organization = ({
         }`}
       >
         {loadingData ? (
-          <ReactLoading type={"spin"} color={"#000"} height={100} width={100} />
+          <ReactLoading
+            type={"spin"}
+            color={localStorage.getItem("theme") === "dark" ? "#FFF" : "#000"}
+            height={100}
+            width={100}
+          />
         ) : orgNotFound ? (
           <Error notFound={null} privateRepos={false} noCommits={null} />
         ) : zeroRepos ? (
@@ -115,11 +120,11 @@ const Organization = ({
           filteredRepoSearch().map((repo, i) => {
             return (
               <Link key={i} to={repo.name.trim().toLowerCase()}>
-                <div className="p-5 md:p-10 border-2 border-white cursor-pointer shadow-md rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white hover:shadow-none hover:border-gray-500 transition duration-300 ease">
+                <div className="p-5 md:p-10 border-2 border-white cursor-pointer shadow-md rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white hover:shadow-none hover:border-gray-500 transition duration-300 ease dark:bg-black dark:text-white dark:border-gray-500 dark:hover:border-white dark:shadow-none">
                   <div>
                     <div className="flex flex-wrap items-center gap-5 mb-3">
                       <h1 className="text-xl md:text-2xl">{repo.name}</h1>
-                      <p className="border border-black py-0.5 px-2 rounded-full text-sm font-light">
+                      <p className="border-2 border-black py-0.5 px-2 rounded-full text-sm font-light dark:border-gray-500 theme-transition">
                         {repo.language ? repo.language : "None"}
                       </p>
                       <div className="flex items-center gap-1">
@@ -131,12 +136,12 @@ const Organization = ({
                     </div>
                     <p className="text-xs font-light">{repo.description}</p>
                   </div>
-                  <div className="w-fit flex items-center gap-2 bg-black text-white font-light px-5 rounded-full">
+                  <div className="w-fit border-2 border-black flex items-center gap-2 bg-black text-white font-light px-5 py-2 rounded-full dark:border-gray-500 theme-transition">
                     <div className="flex gap-1 items-center">
                       <AiOutlineStar size={25} />
                       <p>{repo.stargazers_count.toLocaleString()}</p>
                     </div>
-                    <div className="bg-white w-1 h-10" />
+                    <div className="bg-white w-1 h-8 rounded-full dark:bg-gray-500 theme-transition" />
                     <div className="flex gap-1 items-center">
                       <AiOutlineFork size={25} />
                       <p>{repo.forks_count.toLocaleString()}</p>

@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { FiArrowLeft } from "react-icons/fi";
+import { AiOutlineHome } from "react-icons/ai";
 
 const Error = ({ notFound, privateRepos, noCommits }) => {
   return (
     <div
       className={`${
         notFound && "right-animation"
-      } flex items-center gap-3 bg-black text-white px-5 py-1 rounded-full font-light text-sm w-fit`}
+      } flex items-center gap-3 bg-black text-white px-5 py-1 rounded-full font-light text-sm w-fit border-2 border-black dark:border-white theme-transition`}
     >
       <p className="m-1">
         {privateRepos
@@ -21,7 +21,7 @@ const Error = ({ notFound, privateRepos, noCommits }) => {
       </p>
       <div className="w-1 h-12 rounded-full bg-white rotate-[30deg]" />
       <Link to="/">
-        <FiArrowLeft
+        <AiOutlineHome
           size={26}
           className="bg-white border-2 border-white rounded-full text-black m-1 p-1 hover:text-white hover:bg-black transition duration-300 ease"
         />

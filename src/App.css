@@ -1,5 +1,6 @@
-/* @media (prefers-color-scheme: light) {
-} */
+.theme-transition {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
 
 .right-animation,
 .left-animation,
@@ -20,6 +21,11 @@
   }
   .down-animation {
     animation: slide-down 1s cubic-bezier(0.6, -0.05, 0.01, 0.99);
+  }
+  .toggle-animation {
+    animation: toggle-slide-to-right 1s cubic-bezier(0.6, -0.05, 0.01, 0.99);
+    animation-delay: 0.7s;
+    animation-fill-mode: both;
   }
   .delay-animation-07 {
     animation-delay: 0.7s;
@@ -68,5 +74,16 @@
   to {
     opacity: 1;
     top: 0px;
+  }
+}
+
+@keyframes toggle-slide-to-right {
+  from {
+    opacity: 0;
+    right: 100px;
+  }
+  to {
+    opacity: 1;
+    right: 16px;
   }
 }
