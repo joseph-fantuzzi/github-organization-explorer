@@ -12,11 +12,11 @@ const Navbar = ({ searchName, setSearchName, repoList }) => {
 
   return (
     <div className="pb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-2">
-      <Link to="/" className="font-light">
+      <Link to="/" className="font-light dark:text-white theme-transition">
         GitHub Organization Explorer
       </Link>
       <div className="relative flex items-center gap-2 w-full md:w-1/2">
-        <FiSearch className="absolute top-3 left-3" />
+        <FiSearch className="absolute top-3 left-3 dark:text-white theme-transition" />
         <input
           type="text"
           value={searchName}
@@ -26,7 +26,7 @@ const Navbar = ({ searchName, setSearchName, repoList }) => {
               ? "Search this organization..."
               : "Search this repository..."
           }
-          className="bg-white py-2 px-8 rounded-full font-light text-sm w-full border-2 border-white outline-0 focus:border-black transition duration-300 ease"
+          className="bg-white py-2 px-8 rounded-full font-light text-sm w-full border-2 border-white outline-0 focus:border-black transition duration-300 ease dark:bg-black dark:focus:border-white dark:text-white"
         />
       </div>
     </div>

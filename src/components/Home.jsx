@@ -24,7 +24,7 @@ const Home = ({
               value={searchValue}
               onChange={handleSearchChange}
               placeholder="Search an organization..."
-              className="right-animation bg-white p-3.5 rounded-xl font-light text-sm w-full border-2 border-white outline-0 focus:border-black transition duration-300 ease dark:bg-black dark:focus:bg-white dark:text-white dark:focus:text-black"
+              className="right-animation bg-white p-3.5 rounded-xl font-light text-sm w-full border-2 border-white outline-0 focus:border-black transition duration-300 ease dark:bg-black dark:focus:bg-white dark:focus:border-white dark:text-white dark:focus:text-black"
             />
             <button className="up-animation p-4 bg-black border-2 border-black text-white rounded-xl hover:text-black hover:bg-white active:text-black active:bg-white transition duration-300 ease dark:border-white">
               <FiSearch />
