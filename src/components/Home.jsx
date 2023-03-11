@@ -1,5 +1,6 @@
 import { FiSearch } from "react-icons/fi";
 import Footer from "./Footer";
+import Theme from "./Theme";
 
 const Home = ({
   searchValue,
@@ -10,7 +11,7 @@ const Home = ({
   return (
     <div className="w-11/12 mx-auto min-h-[100svh] flex flex-col justify-between items-center">
       <div />
-      <div className="mb-20 flex flex-col gap-4 items-center">
+      <div className="mb-20 flex flex-col gap-4 items-center py-10">
         <h1 className="left-animation text-xl md:text-3xl">
           GitHub Organization Explorer
         </h1>
@@ -35,6 +36,7 @@ const Home = ({
       <div className="down-animation delay-animation-07 py-3">
         <Footer />
       </div>
+      <Theme />
     </div>
   );
 };
