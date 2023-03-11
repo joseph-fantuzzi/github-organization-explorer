@@ -11,7 +11,9 @@ const Home = ({
     <div className="w-11/12 mx-auto min-h-[100svh] flex flex-col justify-between items-center">
       <div />
       <div className="mb-20 flex flex-col gap-4 items-center">
-        <h1 className="text-xl md:text-3xl">GitHub Organization Explorer</h1>
+        <h1 className="text-animation text-xl md:text-3xl">
+          GitHub Organization Explorer
+        </h1>
         <div className="w-full">
           <form onSubmit={handleFormSubmit} className="flex items-center gap-2">
             <input
@@ -19,9 +21,9 @@ const Home = ({
               value={searchValue}
               onChange={handleSearchChange}
               placeholder="Search an organization..."
-              className="bg-white p-3.5 rounded-xl font-light text-sm w-full border-2 border-white outline-0 focus:border-black transition duration-300 ease"
+              className="input-animation bg-white p-3.5 rounded-xl font-light text-sm w-full border-2 border-white outline-0 focus:border-black transition duration-300 ease"
             />
-            <button className="p-4 bg-black border-2 border-white text-white rounded-xl hover:text-black hover:bg-white hover:border-black active:text-black active:bg-white active:border-black transition duration-300 ease">
+            <button className="button-animation p-4 bg-black border-2 border-white text-white rounded-xl hover:text-black hover:bg-white hover:border-black active:text-black active:bg-white active:border-black transition duration-300 ease">
               <FiSearch />
             </button>
           </form>
@@ -30,7 +32,7 @@ const Home = ({
           </p>
         </div>
       </div>
-      <div className="py-3">
+      <div className="footer-animation py-3">
         <Footer />
       </div>
     </div>
