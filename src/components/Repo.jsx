@@ -121,9 +121,9 @@ const Repo = ({
         {loadingData ? (
           <ReactLoading type={"spin"} color={"#000"} height={100} width={100} />
         ) : repoNotFound ? (
-          <Error privateRepos={null} noCommits={false} />
+          <Error notFound={null} privateRepos={null} noCommits={false} />
         ) : zeroCommits ? (
-          <Error privateRepos={null} noCommits={true} />
+          <Error notFound={null} privateRepos={null} noCommits={true} />
         ) : (
           filteredCommitSearch().map((commit, i) => {
             return (

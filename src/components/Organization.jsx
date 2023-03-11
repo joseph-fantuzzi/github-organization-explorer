@@ -108,9 +108,9 @@ const Organization = ({
         {loadingData ? (
           <ReactLoading type={"spin"} color={"#000"} height={100} width={100} />
         ) : orgNotFound ? (
-          <Error privateRepos={false} noCommits={null} />
+          <Error notFound={null} privateRepos={false} noCommits={null} />
         ) : zeroRepos ? (
-          <Error privateRepos={true} noCommits={null} />
+          <Error notFound={null} privateRepos={true} noCommits={null} />
         ) : (
           filteredRepoSearch().map((repo, i) => {
             return (

@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import Repo from "./components/Repo";
 import Organization from "./components/Organization";
+import Error from "./components/Error";
 import "./App.css";
 
 const BASE_URL = "https://api.github.com";
@@ -85,6 +86,14 @@ function App() {
             zeroCommits={zeroCommits}
             setZeroCommits={setZeroCommits}
           />
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <div className="min-h-[100svh] flex items-center justify-center pb-20">
+            <Error notFound={true} privateRepos={null} noCommits={null} />
+          </div>
         }
       />
     </Routes>
