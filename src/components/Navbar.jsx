@@ -27,7 +27,7 @@ const Navbar = ({ searchName, setSearchName, repoList }) => {
               ? "Search this organization..."
               : "Search this repository..."
           }
-          className="bg-white py-2 px-8 rounded-full font-light text-sm w-full border-2 border-white outline-0 focus:border-black transition duration-300 ease dark:bg-black dark:focus:border-white dark:text-white"
+          className="bg-white py-2 px-8 rounded-full font-light text-sm w-full border-2 border-white focus:outline-none focus:border-black transition duration-300 ease dark:bg-black dark:focus:border-white dark:text-white"
         />
       </div>
     </div>
