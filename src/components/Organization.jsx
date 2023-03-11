@@ -91,10 +91,10 @@ const Organization = ({
         repoList={true}
       />
       <div className="py-5">
-        <h1 className="right-animation delay-animation-03 text-2xl font-medium">
+        <h1 className="text-2xl font-medium">
           {capitalizeFirstLetter(orgName)}
         </h1>
-        <p className="right-animation delay-animation-05 text-sm font-light">
+        <p className="text-sm font-light">
           {filteredRepoSearch().length}{" "}
           {filteredRepoSearch().length === 1 ? "repository " : "repositories "}
           found
@@ -114,12 +114,7 @@ const Organization = ({
         ) : (
           filteredRepoSearch().map((repo, i) => {
             return (
-              <Link
-                key={i}
-                to={repo.name.trim().toLowerCase()}
-                className="down-animation stagger-children"
-                style={{ "--i": i }}
-              >
+              <Link key={i} to={repo.name.trim().toLowerCase()}>
                 <div className="p-5 md:p-10 border-2 border-white cursor-pointer shadow-md rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white hover:shadow-none hover:border-gray-500 transition duration-300 ease">
                   <div>
                     <div className="flex flex-wrap items-center gap-5 mb-3">
@@ -153,7 +148,7 @@ const Organization = ({
           })
         )}
       </div>
-      <div className="text-center py-5 down-animation delay-animation-1">
+      <div className="text-center py-5">
         <Footer />
       </div>
     </div>

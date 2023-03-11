@@ -4,8 +4,8 @@ import { FiArrowLeft } from "react-icons/fi";
 const Error = ({ notFound, privateRepos, noCommits }) => {
   return (
     <div
-      className={`right-animation ${
-        notFound ? "" : "delay-animation-07"
+      className={`${
+        notFound && "right-animation"
       } flex items-center gap-3 bg-black text-white px-5 py-1 rounded-full font-light text-sm w-fit`}
     >
       <p className="m-1">

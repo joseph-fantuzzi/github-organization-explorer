@@ -96,7 +96,7 @@ const Repo = ({
         repoList={false}
       />
       <div className="py-5">
-        <div className="right-animation delay-animation-03 flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <h1 className="text-2xl font-medium">
             {capitalizeFirstLetter(orgName)}/{capitalizeFirstLetter(repoName)}
           </h1>
@@ -107,7 +107,7 @@ const Repo = ({
             />
           </Link>
         </div>
-        <p className="right-animation delay-animation-05 text-sm font-light">
+        <p className="text-sm font-light">
           {filteredCommitSearch().length}{" "}
           {filteredCommitSearch().length === 1 ? "commit " : "commits "}
           found
@@ -129,8 +129,7 @@ const Repo = ({
             return (
               <div
                 key={i}
-                className="down-animation stagger-children p-5 md:p-10 shadow-md rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white"
-                style={{ "--i": i }}
+                className="p-5 md:p-10 shadow-md rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white"
               >
                 <div>
                   <div className="flex flex-wrap items-center gap-5 mb-3">
@@ -169,7 +168,7 @@ const Repo = ({
           })
         )}
       </div>
-      <div className="text-center py-5 down-animation delay-animation-1">
+      <div className="text-center py-5">
         <Footer />
       </div>
     </div>
