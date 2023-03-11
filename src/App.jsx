@@ -15,6 +15,7 @@ function App() {
   const [repoNotFound, setRepoNotFound] = useState(false);
   const [zeroRepos, setZeroRepos] = useState(false);
   const [zeroCommits, setZeroCommits] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ function App() {
    */
   const handleSearchChange = (e) => {
     setSearchValue(e.target.value);
+    setErrorMessage("");
   };
 
   /**
@@ -32,14 +34,16 @@ function App() {
    */
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (searchValue) {
-      setRepoNotFound(false);
-      setOrgNotFound(false);
-      setZeroRepos(false);
-      setZeroCommits(false);
-      navigate(`/${searchValue.trim().toLowerCase()}`);
-      setSearchValue("");
+    if (!searchValue) {
+      setErrorMessage("Please provide an organization name above");
+      return;
     }
+    setRepoNotFound(false);
+    setOrgNotFound(false);
+    setZeroRepos(false);
+    setZeroCommits(false);
+    navigate(`/${searchValue.trim().toLowerCase()}`);
+    setSearchValue("");
   };
 
   return (
@@ -51,6 +55,7 @@ function App() {
             searchValue={searchValue}
             handleSearchChange={handleSearchChange}
             handleFormSubmit={handleFormSubmit}
+            errorMessage={errorMessage}
           />
         }
       />
