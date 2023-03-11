@@ -6,6 +6,7 @@ import { FiCopy, FiCheck, FiArrowLeft } from "react-icons/fi";
 import ReactLoading from "react-loading";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Error from "./Error";
 
 const Repo = ({
   commits,
@@ -120,9 +121,9 @@ const Repo = ({
         {loadingData ? (
           <ReactLoading type={"spin"} color={"#000"} height={100} width={100} />
         ) : repoNotFound ? (
-          <div>Repo Not Found</div>
+          <Error privateRepos={null} noCommits={false} />
         ) : zeroCommits ? (
-          <div>This repository must be private or simply has no commits</div>
+          <Error privateRepos={null} noCommits={true} />
         ) : (
           filteredCommitSearch().map((commit, i) => {
             return (

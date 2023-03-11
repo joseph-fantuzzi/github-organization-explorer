@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
-const Error = ({ privateRepos }) => {
+const Error = ({ privateRepos, noCommits }) => {
   return (
-    <div className="flex items-center gap-3 bg-black text-white px-5 rounded-full font-light text-sm w-fit">
+    <div className="flex items-center gap-3 bg-black text-white px-5 py-2 rounded-full font-light text-sm w-fit">
       <p className="m-1">
         {privateRepos
           ? "This organization must have all private repositories or simply has none"
-          : "This organization does not exist"}
+          : noCommits
+          ? "This repository has no commits"
+          : privateRepos === false
+          ? "This organization does not exist"
+          : "This repository does not exist"}
       </p>
-      <div className="w-1 h-14 rounded-full bg-white rotate-[30deg]" />
+      <div className="w-1 h-12 rounded-full bg-white rotate-[30deg]" />
       <Link to="/">
         <FiArrowLeft
           size={26}
