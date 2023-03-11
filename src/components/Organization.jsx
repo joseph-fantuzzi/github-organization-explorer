@@ -9,6 +9,7 @@ import {
 import ReactLoading from "react-loading";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Error from "./Error";
 
 const Organization = ({
   BASE_URL,
@@ -107,11 +108,9 @@ const Organization = ({
         {loadingData ? (
           <ReactLoading type={"spin"} color={"#000"} height={100} width={100} />
         ) : orgNotFound ? (
-          <div>Organization Not Found</div>
+          <Error privateRepos={false} />
         ) : zeroRepos ? (
-          <div>
-            This Organization must be private or simply has no repositories
-          </div>
+          <Error privateRepos={true} />
         ) : (
           filteredRepoSearch().map((repo, i) => {
             return (
