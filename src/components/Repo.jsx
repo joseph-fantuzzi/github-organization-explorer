@@ -113,7 +113,7 @@ const Repo = ({
         </p>
       </div>
       <div
-        className={`flex flex-col gap-3 min-h-main ${
+        className={`flex flex-col gap-3 min-h-main_mobile md:min-h-main_desktop ${
           loadingData && "items-center justify-center pb-40"
         }`}
       >
