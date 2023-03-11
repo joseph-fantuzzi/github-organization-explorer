@@ -1,5 +1,72 @@
-/* @media (prefers-reduced-motion: no-preference) {
-} */
-
 /* @media (prefers-color-scheme: light) {
 } */
+
+.right-animation,
+.left-animation,
+.up-animation,
+.down-animation {
+  position: relative;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .right-animation {
+    animation: slide-to-right 2s cubic-bezier(0.6, -0.05, 0.01, 0.99);
+  }
+  .up-animation {
+    animation: slide-up 2s cubic-bezier(0.6, -0.05, 0.01, 0.99);
+  }
+  .left-animation {
+    animation: slide-to-left 2s cubic-bezier(0.6, -0.05, 0.01, 0.99);
+  }
+  .down-animation {
+    animation: slide-down 1s cubic-bezier(0.6, -0.05, 0.01, 0.99);
+  }
+  .delay-animation-07 {
+    animation-delay: 0.7s;
+    animation-fill-mode: both;
+  }
+}
+
+@keyframes slide-to-right {
+  from {
+    opacity: 0;
+    left: -200px;
+  }
+  to {
+    opacity: 1;
+    left: 0px;
+  }
+}
+
+@keyframes slide-to-left {
+  from {
+    opacity: 0;
+    right: -200px;
+  }
+  to {
+    opacity: 1;
+    right: 0px;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    bottom: -50px;
+  }
+  to {
+    opacity: 1;
+    bottom: 0px;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    top: -50px;
+  }
+  to {
+    opacity: 1;
+    top: 0px;
+  }
+}

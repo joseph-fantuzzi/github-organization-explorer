@@ -12,10 +12,10 @@ const Navbar = ({ searchName, setSearchName, repoList }) => {
 
   return (
     <div className="pb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-2">
-      <Link to="/" className="font-light">
+      <Link to="/" className="right-animation font-light">
         GitHub Organization Explorer
       </Link>
-      <div className="relative flex items-center gap-2 w-full md:w-1/2">
+      <div className="left-animation relative flex items-center gap-2 w-full md:w-1/2">
         <FiSearch className="absolute top-3 left-3" />
         <input
           type="text"
