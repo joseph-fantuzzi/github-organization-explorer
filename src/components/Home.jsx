@@ -7,6 +7,8 @@ const Home = ({
   handleSearchChange,
   handleFormSubmit,
   errorMessage,
+  toggle,
+  setToggle,
 }) => {
   return (
     <div className="w-11/12 mx-auto min-h-[100svh] flex flex-col justify-between items-center">
@@ -36,7 +38,7 @@ const Home = ({
       <div className="down-animation delay-animation-07 py-3">
         <Footer />
       </div>
-      <Theme />
+      <Theme toggle={toggle} setToggle={setToggle} />
     </div>
   );
 };
