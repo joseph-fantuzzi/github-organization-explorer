@@ -6,6 +6,7 @@ import { FiCopy, FiCheck, FiArrowLeft } from "react-icons/fi";
 import ReactLoading from "react-loading";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Error from "./Error";
 
 const Repo = ({
   commits,
@@ -113,16 +114,16 @@ const Repo = ({
         </p>
       </div>
       <div
-        className={`flex flex-col gap-3 min-h-main ${
+        className={`flex flex-col gap-3 min-h-main_mobile md:min-h-main_desktop ${
           loadingData && "items-center justify-center pb-40"
         }`}
       >
         {loadingData ? (
           <ReactLoading type={"spin"} color={"#000"} height={100} width={100} />
         ) : repoNotFound ? (
-          <div>Repo Not Found</div>
+          <Error notFound={null} privateRepos={null} noCommits={false} />
         ) : zeroCommits ? (
-          <div>This repository must be private or simply has no commits</div>
+          <Error notFound={null} privateRepos={null} noCommits={true} />
         ) : (
           filteredCommitSearch().map((commit, i) => {
             return (
