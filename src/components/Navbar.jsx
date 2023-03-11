@@ -21,6 +21,7 @@ const Navbar = ({ searchName, setSearchName, repoList }) => {
           type="text"
           value={searchName}
           onChange={handleSearchChange}
+          data-testid="nav-input"
           placeholder={
             repoList
               ? "Search this organization..."
