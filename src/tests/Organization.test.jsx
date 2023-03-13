@@ -145,7 +145,6 @@ describe("Organization Component Tests", () => {
     render(
       <Router>
         <Organization
-          BASE_URL={"https://api.github.com"}
           repos={repositories}
           setRepos={vi.fn()}
           orgNotFound={true}
@@ -161,7 +160,6 @@ describe("Organization Component Tests", () => {
     render(
       <Router>
         <Organization
-          BASE_URL={"https://api.github.com"}
           repos={repositories}
           setRepos={vi.fn()}
           orgNotFound={true}
@@ -180,7 +178,6 @@ describe("Organization Component Tests", () => {
     render(
       <Router>
         <Organization
-          BASE_URL={"https://api.github.com"}
           repos={repositories}
           setRepos={vi.fn()}
           orgNotFound={false}

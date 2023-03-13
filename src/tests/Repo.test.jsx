@@ -98,7 +98,6 @@ describe("Repository Component Tests", () => {
     render(
       <Router>
         <Repo
-          BASE_URL={"https://api.github.com"}
           commits={commits}
           setCommits={vi.fn()}
           repoNotFound={true}
@@ -114,7 +113,6 @@ describe("Repository Component Tests", () => {
     render(
       <Router>
         <Repo
-          BASE_URL={"https://api.github.com"}
           commits={commits}
           setCommits={vi.fn()}
           repoNotFound={true}
@@ -133,7 +131,6 @@ describe("Repository Component Tests", () => {
     render(
       <Router>
         <Repo
-          BASE_URL={"https://api.github.com"}
           commits={commits}
           setCommits={vi.fn()}
           repoNotFound={true}

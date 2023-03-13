@@ -4,9 +4,8 @@ import Home from "./components/Home";
 import Repo from "./components/Repo";
 import Organization from "./components/Organization";
 import Error from "./components/Error";
-import "./App.css";
-
-const BASE_URL = "https://api.github.com";
+import { BASE_URL } from "./constants";
+import "./styles/App.css";
 
 function App() {
   const [repos, setRepos] = useState([]);
@@ -21,6 +20,10 @@ function App() {
 
   const navigate = useNavigate();
 
+  //on initial render of the app, checks local storage for user's preference.
+  // adds dark class to html tag element for tailwindcss dark mode styling if dark is present in local storage,
+  //otherwise it removes the dark class from the html tag element
+  //toggle state is set as well
   useEffect(() => {
     if (
       localStorage.theme === "dark" ||
@@ -82,7 +85,6 @@ function App() {
           path="/:orgName"
           element={
             <Organization
-              BASE_URL={BASE_URL}
               repos={repos}
               setRepos={setRepos}
               orgNotFound={orgNotFound}
@@ -98,7 +100,6 @@ function App() {
             <Repo
               commits={commits}
               setCommits={setCommits}
-              BASE_URL={BASE_URL}
               repoNotFound={repoNotFound}
               setRepoNotFound={setRepoNotFound}
               zeroCommits={zeroCommits}

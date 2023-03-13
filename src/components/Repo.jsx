@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
-import { AiOutlineCalendar } from "react-icons/ai";
-import { FiCopy, FiCheck, FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
 import ReactLoading from "react-loading";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Error from "./Error";
+import CommitItem from "./CommitItem";
+import { capitalizeFirstLetter, filteredSearch } from "../utils/helpers";
+import { fetchCommitList } from "../utils/api-helpers";
 
 const Repo = ({
   commits,
   setCommits,
-  BASE_URL,
   repoNotFound,
   setRepoNotFound,
   zeroCommits,
@@ -27,54 +27,20 @@ const Repo = ({
    * On initial render, sends a get request to github api to retrieve commit data for that repo
    */
   useEffect(() => {
-    const viewCommitList = async () => {
-      try {
-        setLoadingData(true);
-        const response = await axios.get(
-          `${BASE_URL}/repos/${orgName}/${repoName}/commits`
-        );
-        setLoadingData(false);
-        setCommits(response.data);
-        if (response.data.length === 0) {
-          setZeroCommits(true);
-        }
-      } catch (err) {
-        setLoadingData(false);
-        setCommits([]);
-        setRepoNotFound(true);
-        console.error(err);
-      }
-    };
-    viewCommitList();
+    fetchCommitList(
+      orgName,
+      repoName,
+      setLoadingData,
+      setCommits,
+      setZeroCommits,
+      setRepoNotFound
+    );
   }, []);
 
-  /**filters specfic repository's commits by search query from user
-   * @returns filtered array
+  /**
+   * takes in a sha commit hash and copies it to the user's clipboard
+   * @param hash
    */
-  const filteredCommitSearch = () => {
-    const sanitize = searchCommitName.trim().toLowerCase();
-    if (!sanitize) return commits;
-    return commits.filter((commit) => {
-      return commit.commit.message.toLowerCase().includes(sanitize);
-    });
-  };
-
-  /**capitalizes the first letter of a string
-   * @returns string
-   */
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
-  /**formats date with format month.date.year
-   * @returns string
-   */
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return `${date.getMonth() + 1}.${date.getDate()}.${date.getFullYear()}`;
-  };
-
-  // takes in a sha commit hash and copies it to the user's clipboard
   const copyShaHash = async (hash) => {
     try {
       setCopied(hash);
@@ -108,8 +74,10 @@ const Repo = ({
           </Link>
         </div>
         <p className="text-sm font-light">
-          {filteredCommitSearch().length}{" "}
-          {filteredCommitSearch().length === 1 ? "commit " : "commits "}
+          {filteredSearch(searchCommitName, commits, true).length}{" "}
+          {filteredSearch(searchCommitName, commits, true).length === 1
+            ? "commit "
+            : "commits "}
           found
         </p>
       </div>
@@ -125,45 +93,14 @@ const Repo = ({
         ) : zeroCommits ? (
           <Error notFound={null} privateRepos={null} noCommits={true} />
         ) : (
-          filteredCommitSearch().map((commit, i) => {
+          filteredSearch(searchCommitName, commits, true).map((commit, i) => {
             return (
-              <div
+              <CommitItem
                 key={i}
-                className="p-5 md:p-10 shadow-md border-2 border-white rounded-lg flex flex-col lg:flex-row lg:items-center gap-5 justify-between bg-white dark:bg-black dark:text-white dark:border-gray-500 dark:shadow-none theme-transition"
-              >
-                <div>
-                  <div className="flex flex-wrap items-center gap-5 mb-3">
-                    <h1 className="text-sm md:text-base">
-                      {commit.commit.message}
-                    </h1>
-                    <div className="flex items-center gap-1">
-                      <AiOutlineCalendar size={20} />
-                      <p className="font-light text-sm">
-                        {formatDate(commit.commit.author.date)}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={commit.author?.avatar_url}
-                      className="rounded-full w-8"
-                    />
-                    <p>{commit.author?.login}</p>
-                  </div>
-                </div>
-                <div className="w-fit flex items-center gap-2 border-2 border-black bg-black text-white font-light px-5 py-2 rounded-full dark:border-gray-500 theme-transition">
-                  {copied === commit.sha ? (
-                    <FiCheck className="m-1 text-green-300" />
-                  ) : (
-                    <FiCopy
-                      className="cursor-pointer m-1"
-                      onClick={() => copyShaHash(commit.sha)}
-                    />
-                  )}
-                  <div className="bg-white w-1 h-8 rounded-full dark:bg-gray-500 theme-transition" />
-                  <p className="m-1">{commit.sha.slice(0, 7)}</p>
-                </div>
-              </div>
+                commit={commit}
+                copyShaHash={copyShaHash}
+                copied={copied}
+              />
             );
           })
         )}
