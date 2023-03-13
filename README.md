@@ -48,7 +48,7 @@ An application to query GitHub Organizations and view a list of their repositori
 ### User Stories:
 
 - [x] Basic Requirement: As a user, I would like to be able to see a list of Netflix's repositories, and when I click on a repository, I want to be able to see the list of commits.
-- [x] Bonus Requirement: As a user I want to be able to type into an input an organization name other than Netflix and see a list of that organization's repositories and commits instead.
+- [x] Bonus Requirement: As a user, I want to be able to type into an input an organization name other than Netflix and see a list of that organization's repositories and commits instead.
 
 ### Basic Features:
 
@@ -60,7 +60,7 @@ An application to query GitHub Organizations and view a list of their repositori
 
 ### Bonus Features:
 
-- [x] UI/UX Responsive Design beautifully crafted for every device type and size
+- [x] UI/UX responsive design beautifully crafted for every device type and size
 - [x] Search for any GitHub organization name in the home page input and view any organization's repositories and commits
 - [x] Theme toggle - choose between light and dark mode throughout the application
 - [x] Route navigation - making the application more structured by allowing users to quickly route to the organization name for the list of that organization's repositories and a nested repository name route for that repository's list of commits
@@ -73,6 +73,14 @@ An application to query GitHub Organizations and view a list of their repositori
 - [x] Loading animations when the response from the server has not come back yet
 - [x] Unit tests for all components
 - [x] Favicon
+
+### Client Routing:
+
+| Page | Route |
+| --- | --- |
+| Home | / |
+| Organization | /:organization_name |
+| Repository | /:organization_name/:repository_name |
 
 ### Planning, Design, and Technical Decisions:
 
